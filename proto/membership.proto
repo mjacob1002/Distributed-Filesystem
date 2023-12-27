@@ -1,0 +1,17 @@
+syntax="proto3";
+option go_package ="../pkg/gen_proto";
+
+message TableEntry {
+	string machine_id = 1; // machine identification
+    int64 heartbeat_counter = 2; // current heartbeat counter
+	string hostname = 3; // the hostname of the guy sending the heartbeat
+	string port = 4; // the port of the guy sending the heartbeat
+	int64 local_time = 5; // just used locally when merging tables
+}
+
+// used to sendout the heartbeats to other nodes
+message HeartbeatMessage {
+	repeated TableEntry entries = 1;
+	string hostname = 2; // the hostname of the guy sending the heartbeat
+	string port = 3; // the port of the guy sending the heartbeat
+}
